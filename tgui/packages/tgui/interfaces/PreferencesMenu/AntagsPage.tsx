@@ -189,6 +189,11 @@ export const AntagsPage = () => {
   return (
     <Box className="PreferencesMenu__Antags">
       <AntagSelection
+        name="Mojave Sun"
+        antagonists={antagsByCategory.get(Category.MojaveSun)!}
+      />
+
+      <AntagSelection
         name="Roundstart"
         antagonists={antagsByCategory.get(Category.Roundstart)!}
       />

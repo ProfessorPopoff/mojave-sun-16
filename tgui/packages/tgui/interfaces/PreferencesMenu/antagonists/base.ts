@@ -29,6 +29,7 @@ export type Antagonist = {
 };
 
 export enum Category {
+  MojaveSun,
   Roundstart,
   Midround,
   Latejoin,

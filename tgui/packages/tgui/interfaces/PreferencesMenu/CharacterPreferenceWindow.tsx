@@ -129,7 +129,6 @@ export const CharacterPreferenceWindow = (props, context) => {
                   Factions
                 </PageButton>
               </Stack.Item>
-              {/*
               <Stack.Item grow>
                 <PageButton
                   currentPage={currentPage}
@@ -139,7 +138,7 @@ export const CharacterPreferenceWindow = (props, context) => {
                   Antagonists
                 </PageButton>
               </Stack.Item>
-
+              {/*
               <Stack.Item grow>
                 <PageButton
                   currentPage={currentPage}

@@ -151,3 +151,11 @@
 
 /obj/effect/landmark/start/ms13/redgang
 	name = "Red ganger"
+
+// Event Spawns //
+
+/obj/effect/landmark/ms13
+	name = "BASE TYPE MS13 LANDMARK"
+
+/obj/effect/landmark/ms13/event
+	name = "Event spawner"
