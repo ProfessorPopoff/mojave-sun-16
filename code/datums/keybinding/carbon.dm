@@ -56,3 +56,17 @@
 	var/mob/living/carbon/carbon_user = user.mob
 	carbon_user.give()
 	return TRUE
+
+/datum/keybinding/carbon/fixeye
+	hotkey_keys = list("F")
+	name = "fixeye"
+	full_name = "Fix Eye"
+	description = "Fix the direction you're staring at."
+	category = CATEGORY_MOVEMENT
+
+/datum/keybinding/carbon/fixeye/down(client/user)
+	. = ..()
+	var/mob/living/living_user = user.mob
+	if(istype(living_user))
+		SEND_SIGNAL(living_user, COMSIG_FIXEYE_TOGGLE)
+	return TRUE

@@ -40,3 +40,5 @@
 #define COMSIG_ATOM_PRE_PRESSURE_PUSH "atom_pre_pressure_push"
 	///prevents pressure movement
 	#define COMSIG_ATOM_BLOCKS_PRESSURE (1<<0)
+///from base of atom/setDir(): (old_dir, new_dir). Called before the direction changes.
+	#define COMPONENT_NO_DIR_CHANGE 1
