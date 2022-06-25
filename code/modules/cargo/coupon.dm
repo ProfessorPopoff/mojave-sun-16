@@ -13,7 +13,7 @@
 
 /// Choose what our prize is :D
 /obj/item/coupon/proc/generate(rig_omen=FALSE)
-	discounted_pack = pick(subtypesof(/datum/supply_pack/goody))
+//	discounted_pack = pick(subtypesof(/datum/supply_pack/goody))
 	var/list/chances = list("0.10" = 4, "0.15" = 8, "0.20" = 10, "0.25" = 8, "0.50" = 4, COUPON_OMEN = 1)
 	if(rig_omen)
 		discount_pct_off = COUPON_OMEN

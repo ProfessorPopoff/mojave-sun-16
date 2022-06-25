@@ -294,7 +294,7 @@
 	description = "These flowers are rather soothing."
 	mood_change = 1
 
-/datum/mood_event/playing_cards/add_effects(param)
+/*/datum/mood_event/playing_cards/add_effects(param)
 	var/card_players = 1
 	for(var/mob/living/carbon/player in viewers(COMBAT_MESSAGE_RANGE, owner))
 		var/player_has_cards = player.is_holding(/obj/item/toy/singlecard) || player.is_holding_item_of_type(/obj/item/toy/cards)
@@ -304,7 +304,7 @@
 				break
 
 	mood_change *= card_players
-	return ..()
+	return ..() */
 
 /datum/mood_event/russian_roulette_win
 	description = "I gambled my life and won! I'm lucky to be alive..."

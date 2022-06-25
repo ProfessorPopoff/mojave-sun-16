@@ -6,7 +6,7 @@
 	icon_state = "portal_off"
 
 	idle_power_usage = 0
-	active_power_usage = BASE_MACHINE_ACTIVE_CONSUMPTION * 2
+//	active_power_usage = BASE_MACHINE_ACTIVE_CONSUMPTION * 2
 
 	anchored = FALSE
 	density = TRUE

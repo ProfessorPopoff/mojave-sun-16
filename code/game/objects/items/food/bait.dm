@@ -18,7 +18,7 @@
 	icon_state = "worm"
 	food_reagents = list(/datum/reagent/consumable/nutriment/protein = 1)
 	tastes = list("meat" = 1, "worms" = 1)
-	foodtypes = GROSS | MEAT | BUGS
+	foodtypes = GROSS | MEAT
 	w_class = WEIGHT_CLASS_TINY
 	bait_quality = BASIC_QUALITY_BAIT_TRAIT
 	rod_overlay_icon_state = "worm_overlay"

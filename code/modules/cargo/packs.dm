@@ -2494,7 +2494,7 @@
 	crate_name = "tattoo crate"
 	crate_type = /obj/structure/closet/crate/wooden
 
-/datum/supply_pack/misc/aquarium_kit
+/*/datum/supply_pack/misc/aquarium_kit
 	name = "Aquarium Kit"
 	desc = "Everything you need to start your own aquarium. Contains aquarium construction kit, fish catalog, feed can and three freshwater fish from our collection."
 	cost = CARGO_CRATE_VALUE * 5
@@ -2506,7 +2506,7 @@
 					/obj/item/storage/box/aquarium_props,
 					/obj/item/aquarium_kit)
 	crate_name = "aquarium kit crate"
-	crate_type = /obj/structure/closet/crate/wooden
+	crate_type = /obj/structure/closet/crate/wooden */
 
 /datum/supply_pack/misc/aquarium_fish
 	name = "Aquarium Fish Case"
