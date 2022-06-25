@@ -1238,3 +1238,53 @@
 	build_path = /obj/item/razor
 	category = list("initial","Medical")
 	departmental_flags = DEPARTMENTAL_FLAG_SERVICE
+
+/datum/design/paperroll
+	name = "Hand Labeler Paper Roll"
+	id = "roll"
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = 50, /datum/material/glass = 25)
+	build_path = /obj/item/hand_labeler_refill
+	category = list("initial", "Misc", "Equipment")
+
+/datum/design/toner
+	name = "Toner Cartridge"
+	id = "toner"
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = 10, /datum/material/glass = 10)
+	build_path = /obj/item/toner
+	category = list("initial", "Misc", "Equipment")
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SERVICE
+
+/datum/design/toner/large
+	name = "Large Toner Cartridge"
+	id = "toner_large"
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = 35, /datum/material/glass = 35)
+	build_path = /obj/item/toner/large
+	category = list("initial", "Misc", "Equipment")
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SERVICE
+
+/datum/design/solar
+	name = "Solar Panel Frame"
+	id = "solar_panel"
+	build_type = AUTOLATHE
+	materials = list(/datum/material/iron = 3500, /datum/material/glass = 1000)
+	build_path = /obj/item/solar_assembly
+	category = list("initial", "Construction")
+
+/datum/design/tracker_electronics
+	name = "Solar Tracking Electronics"
+	id = "solar_tracker"
+	build_type = AUTOLATHE
+	materials = list(/datum/material/iron = 100, /datum/material/glass = 500)
+	build_path = /obj/item/electronics/tracker
+	category = list("initial", "Electronics", "Construction")
+
+/datum/design/fishing_rod_basic
+	name = "Fishing Rod"
+	id = "fishing_rod"
+	build_type = AUTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = 200, /datum/material/glass = 200)
+	build_path = /obj/item/fishing_rod
+	category = list("initial", "Misc", "Equipment")
