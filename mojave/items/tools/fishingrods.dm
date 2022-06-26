@@ -7,10 +7,8 @@
 	w_class = WEIGHT_CLASS_BULKY
 	icon = 'mojave/icons/objects/tools/tools_world.dmi'
 	inhand_icon_state = null
-	inhand_x_dimension = 32
-	inhand_y_dimension = 32
-	lefthand_file = 'mojave/icons/mob/inhands/items_lefthand.dmi'
-	righthand_file = 'mojave/icons/mob/inhands/items_righthand.dmi'
+	lefthand_file = 'mojave/icons/mob/inhands/items64x_lefthand.dmi'
+	righthand_file = 'mojave/icons/mob/inhands/items64x_righthand.dmi'
 	grid_width = 192
 	grid_height = 32
 
@@ -29,14 +27,14 @@
 	name = "wooden fishing rod"
 	desc = "A basic wooden fishing rod. Capable and proven."
 	tool_behaviour = TOOL_FISHINGROD
-	icon_state = "basic"
+	icon_state = "rod_wood"
 	difficulty_modifier = 5
 	ui_description = "A wooden fishing rod. Reminds you of a time you were never a part of."
 
 /obj/item/fishing_rod/ms13/telescopic
 	name = "telescoping fishing rod"
 	desc = "A telescoping fishing rod, perfect to store away in your bag."
-	icon_state = "telescopic-collapsed"
+	icon_state = "rod_extendable"
 	tool_behaviour = null // starts closed
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_width = 96
@@ -45,7 +43,7 @@
 	cast_range = 0
 	ui_description = "A telescoping fishing rod, perfect to store away in your bag."
 	var/toggled = FALSE
-	var/extended_icon = "telescopic"
+	var/extended_icon = "rod_extendable_extended"
 	var/on_sound = 'sound/weapons/batonextend.ogg'
 
 /obj/item/fishing_rod/ms13/telescopic/attack_self(mob/user, modifiers)
@@ -84,7 +82,7 @@
 /obj/item/fishing_rod/ms13/advanced
 	name = "advanced fishing rod"
 	desc = "A professional, high-end fishing rod, state of the art fishing technology. They don't make them like this anymore."
-	icon_state = "advanced"
+	icon_state = "rod_advanced"
 	difficulty_modifier = -5
 	cast_range = 6
 	ui_description = "A high quality fishing rod with an automatic reel. Makes quick work of the fish"
