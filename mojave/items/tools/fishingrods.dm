@@ -1,41 +1,54 @@
 // Fishing rods
 
-/obj/item/ms13/tools/fishing_rod
+/obj/item/fishing_rod/ms13
 	name = "fishing rod"
 	desc = "You shouldn't be seeing this. LOOK AWAY."
 	tool_behaviour = TOOL_FISHINGROD
 	w_class = WEIGHT_CLASS_BULKY
 	icon = 'mojave/icons/objects/tools/tools_world.dmi'
+	inhand_icon_state = null
+	inhand_x_dimension = 32
+	inhand_y_dimension = 32
 	lefthand_file = 'mojave/icons/mob/inhands/items_lefthand.dmi'
 	righthand_file = 'mojave/icons/mob/inhands/items_righthand.dmi'
 	grid_width = 192
 	grid_height = 32
 
-/obj/item/ms13/tools/fishing_rod/Initialize(mapload)
+	/// How far can you cast this
+	cast_range = 4
+	/// Fishing minigame difficulty modifier (additive)
+	difficulty_modifier = 0
+	/// Explaination of rod functionality shown in the ui
+	ui_description = "A classic fishing rod, with no special qualities."
+
+/obj/item/fishing_rod/ms13/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/world_icon, null, icon, 'mojave/icons/objects/tools/tools_inventory.dmi')
 
-/obj/item/ms13/tools/fishing_rod/basic
+/obj/item/fishing_rod/ms13/basic
 	name = "wooden fishing rod"
 	desc = "A basic wooden fishing rod. Capable and proven."
 	tool_behaviour = TOOL_FISHINGROD
 	icon_state = "basic"
-	toolspeed = 1.5 //60 second fish time
+	difficulty_modifier = 5
+	ui_description = "A wooden fishing rod. Reminds you of a time you were never a part of."
 
-/obj/item/ms13/tools/fishing_rod/telescopic
+/obj/item/fishing_rod/ms13/telescopic
 	name = "telescoping fishing rod"
 	desc = "A telescoping fishing rod, perfect to store away in your bag."
 	icon_state = "telescopic-collapsed"
 	tool_behaviour = null // starts closed
 	w_class = WEIGHT_CLASS_NORMAL
-	toolspeed = 1 //40 second fish time
 	grid_width = 96
 	grid_height = 32
+	difficulty_modifier = 100 // Fishin' wit da collapsed whip
+	cast_range = 0
+	ui_description = "A telescoping fishing rod, perfect to store away in your bag."
 	var/toggled = FALSE
 	var/extended_icon = "telescopic"
 	var/on_sound = 'sound/weapons/batonextend.ogg'
 
-/obj/item/ms13/tools/fishing_rod/telescopic/attack_self(mob/user, modifiers)
+/obj/item/fishing_rod/ms13/telescopic/attack_self(mob/user, modifiers)
 	. = ..()
 	if(!toggled)
 		to_chat(user, span_notice("You begin to extend the rod fully."))
@@ -49,6 +62,9 @@
 			playsound(src, on_sound, 60, TRUE)
 			grid_width = 192
 			grid_height = 32
+			difficulty_modifier = 100 // Fishin' wit da collapsed whip
+			cast_range = 0
+
 	else
 		to_chat(user, span_notice("You begin to collapse the rod."))
 		if(do_after(user, 2.5 SECONDS, interaction_key = DOAFTER_SOURCE_TELESCOPICROD))
@@ -61,9 +77,14 @@
 			playsound(src, on_sound, 85, TRUE)
 			grid_width = 96
 			grid_height = 32
+			difficulty_modifier = 0 // Fishin' wit da collapsed whip
+			cast_range = 5
 
-/obj/item/ms13/tools/fishing_rod/advanced
+
+/obj/item/fishing_rod/ms13/advanced
 	name = "advanced fishing rod"
 	desc = "A professional, high-end fishing rod, state of the art fishing technology. They don't make them like this anymore."
 	icon_state = "advanced"
-	toolspeed = 0.5 //20 second fish time
+	difficulty_modifier = -5
+	cast_range = 6
+	ui_description = "A high quality fishing rod with an automatic reel. Makes quick work of the fish"

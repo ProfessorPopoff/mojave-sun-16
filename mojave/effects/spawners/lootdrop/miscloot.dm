@@ -73,9 +73,9 @@
 	name = "fishing rod spawner"
 	spawn_loot_chance = 75
 	loot = list(
-			/obj/item/ms13/tools/fishing_rod/basic = 70,
-			/obj/item/ms13/tools/fishing_rod/telescopic = 20,
-			/obj/item/ms13/tools/fishing_rod/advanced = 10
+			/obj/item/fishing_rod/ms13/basic = 70,
+			/obj/item/fishing_rod/ms13/telescopic = 20,
+			/obj/item/fishing_rod/ms13/advanced = 10
 			)
 
 //CRAFTING SPAWNERS BELOW//

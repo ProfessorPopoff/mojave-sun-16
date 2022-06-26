@@ -622,54 +622,11 @@
 	var/atom/watertop = /obj/effect/overlay/ms13/water/top/medium
 	var/depth = 0
 	var/coldness = -100
-	var/list/fish = list(/obj/item/food/meat/slab/ms13/fish/sockeye = 1,
-		/obj/item/food/meat/slab/ms13/fish/smallmouth = 2,
-		/obj/item/food/meat/slab/ms13/fish/largemouth = 1,
-		/obj/item/food/meat/slab/ms13/fish/pink = 2,
-		/obj/item/food/meat/slab/ms13/fish/chum = 2,
-		/obj/item/food/meat/slab/ms13/fish/sturgeon = 1,
-		/obj/item/food/meat/slab/ms13/fish/asian = 1)
+	var/fishing_source = /datum/fish_source/lake_ms13 // Fish roster. fwoah
 
-// Increment fish every 5
-#define fishPopFreq   5 MINUTES
-// Increment fish pop by 5
-#define fishPopIncAmt 5
-
-GLOBAL_VAR_INIT(FishPop, 20)
-GLOBAL_VAR(FishPopNextCalc)
-
-/proc/getFishPop()
-  if(world.time > GLOB.FishPopNextCalc)
-    // Increment fishpop since last calc (i.e if 15 minutes, then increment by 5, 3 times)
-    GLOB.FishPop += FLOOR( world.time - GLOB.FishPopNextCalc, fishPopFreq) * fishPopIncAmt
-    GLOB.FishPopNextCalc = world.time + fishPopFreq
-
-  return GLOB.FishPop
-
-/turf/open/ms13/water/attackby(obj/item/W, mob/user, params)
+/turf/open/ms13/water/Initialize()
 	. = ..()
-	if(W.tool_behaviour == TOOL_FISHINGROD)
-		if(!isturf(user.loc))
-			return
-
-		to_chat(user, "<span class='notice'>You start fishing...</span>")
-		if(do_after(user, 40 SECONDS * W.toolspeed, interaction_key = DOAFTER_SOURCE_FISHING))
-			if(!can_fish(user))
-				return TRUE
-			to_chat(user, "<span class='notice'>You reel in your catch.</span>")
-			getFished(user)
-
-/turf/open/ms13/water/proc/getFished(mob/user)
-	var/spawnFish = pick_weight(fish)
-	new spawnFish(user.loc)
-	GLOB.FishPop--
-
-/turf/open/ms13/water/proc/can_fish(mob/user)
-	if(!getFishPop())
-		if(user)
-			to_chat(user, "<span class='warning'>Looks like there's no fish here!</span>")
-		return FALSE
-	return TRUE
+	AddComponent(/datum/component/fishing_spot, fishing_source)
 
 /turf/open/ms13/water/deep
 	name = "deep water"
@@ -883,12 +840,7 @@ GLOBAL_VAR(FishPopNextCalc)
 	name = "sewer water"
 	desc = "Murky and foul smelling water, if you could call it that."
 	baseturfs = /turf/open/ms13/water/sewer
-	fish = list(/obj/item/food/meat/slab/ms13/fish/lamprey = 2,
-		/obj/item/food/meat/slab/ms13/fish/largemouth = 1,
-		/obj/item/food/meat/slab/ms13/fish/chum = 3,
-		/obj/item/food/meat/slab/ms13/fish/blinky = 3,
-		/obj/item/food/meat/slab/ms13/fish/asian = 1)
-
+	fishing_source = /datum/fish_source/sewer_ms13
 
 /turf/open/ms13/water/sewer/deep
 	name = "deep water"
