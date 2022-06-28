@@ -99,7 +99,7 @@
 
 
 
-/obj/item/fish/Initialize(mapload)
+/* /obj/item/fish/Initialize(mapload) MOJAVE SUN EDIT BEGIN
 	. = ..()
 	if(fillet_type)
 		AddElement(/datum/element/processable, TOOL_KNIFE, fillet_type, 1, 5)
@@ -112,6 +112,25 @@
 
 	size = average_size
 	weight = average_weight
+*/
+
+/obj/item/fish/Initialize(mapload)
+	. = ..()
+	var/filet_mod
+	filet_mod = weight / 2300 // Weight divided by a factory of 2300. A bit extra because fish aren't 100% filet... built different
+	if(fillet_type)
+		AddElement(/datum/element/processable, TOOL_KNIFE, fillet_type, filet_mod, 5)
+	AddComponent(/datum/component/aquarium_content, .proc/get_aquarium_animation, list(COMSIG_FISH_STATUS_CHANGED,COMSIG_FISH_STIRRED))
+	RegisterSignal(src, COMSIG_ATOM_TEMPORARY_ANIMATION_START, .proc/on_temp_animation)
+
+	check_environment_after_movement()
+	if(status != FISH_DEAD)
+		START_PROCESSING(SSobj, src)
+
+	size = average_size
+	weight = average_weight
+
+// MOJAVE SUN EDIT END
 
 /obj/item/fish/examine(mob/user)
 	. = ..()

@@ -1,93 +1,118 @@
 // Fish
 
-/obj/item/food/meat/slab/ms13/fish
+/obj/item/fish/ms13
 	name = "fish"
 	desc = "You shouldn't be seeing this."
 	icon = 'mojave/icons/objects/food/fish/fish_world.dmi'
-	bite_consumption = 4
-	food_reagents = list(/datum/reagent/consumable/nutriment/protein = 8)
-	foodtypes = MEAT | RAW
-	w_class = WEIGHT_CLASS_NORMAL
 	grid_height = 64
 	grid_width = 96
-	//Tells the initialize function which icon to pick
-	var/fish_type = "fish"
-	//Determines what kind of fillet you get when cut
-	var/fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish
-	var/fish_size = 1
+	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish
+	/// Average size for this fish type in centimeters. Will be used as gaussian distribution with 20% deviation for fishing, bought fish are always standard size
+	average_size = 50
+	/// Average weight for this fish type in grams
+	average_weight = 1000
+	/// Fishing behaviour
+	fish_ai_type = FISH_AI_DUMB // CHOICES : FISH_AI_DUMB | FISH_AI_ZIPPY | FISH_AI_SLOW
+	/// Base additive modifier to fishing difficulty
+	fishing_difficulty_modifier = 0
 
-/obj/item/food/meat/slab/ms13/fish/MakeProcessable()
-	AddElement(/datum/element/processable, TOOL_KNIFE,  fillet_type, fish_size * 2, 15 SECONDS * toolspeed)
-
-/obj/item/food/meat/slab/ms13/fish/Initialize()
-	fish_size = rand(1,3)
-	icon_state = "[fish_type]-[fish_size]"
-	bite_consumption = fish_size * 2
+/obj/item/fish/ms13/Initialize()
+	. = ..()
 	AddElement(/datum/element/world_icon, null, icon, 'mojave/icons/objects/food/fish/fish_inventory.dmi')
-	return ..()
-
-/obj/item/food/meat/slab/ms13/fish/sockeye
-	fish_type = "sockeye"
-	name = "sockeye salmon"
-	desc = "A sockeye salmon, delicious! And not a bad catch."
-	icon_state = "sockeye_cutlet"
-	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish/sockeye
-
-/obj/item/food/meat/slab/ms13/fish/smallmouth
-	fish_type = "smallmouth"
+/obj/item/fish/ms13/smallmouth
 	name = "smallmouth bass"
 	desc = "A smallmouth bass. A game fish, it had a reputation for fighting."
-	icon_state = "smallmouth_cutlet"
+	icon_state = "smallmouth"
 	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish/smallmouth
+	average_size = 45
+	average_weight = 4080
+	fish_ai_type = FISH_AI_DUMB
+	fishing_difficulty_modifier = 10
 
-/obj/item/food/meat/slab/ms13/fish/largemouth
-	fish_type = "largemouth"
+/obj/item/fish/ms13/largemouth
 	name = "largemouth bass"
 	desc = "A largemouth bass. It's meat is usually mushy, gross!"
-	icon_state = "largemouth_cutlet"
+	icon_state = "largemouth"
 	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish/largemouth
+	average_size = 55
+	average_weight = 5400
+	fish_ai_type = FISH_AI_DUMB
+	fishing_difficulty_modifier = 15
 
-/obj/item/food/meat/slab/ms13/fish/lamprey
-	fish_type = "lamprey"
+/obj/item/fish/ms13/lamprey
 	name = "lamprey"
 	desc = "Typically mislabeled as an eel, the lamprey was highly appreciated by Ancient Romans."
-	icon_state = "lamprey_cutlet"
+	icon_state = "lamprey"
 	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish/lamprey
+	average_size = 25
+	average_weight = 360
+	fish_ai_type = FISH_AI_ZIPPY
+	fishing_difficulty_modifier = -5
+	fishing_traits = list(/datum/fishing_trait/nocturnal)
 
-/obj/item/food/meat/slab/ms13/fish/pink
-	fish_type = "pink"
+/obj/item/fish/ms13/pink
 	name = "pink salmon"
 	desc = "Pink salmon used to be canned or salted pre-war, and was a staple food of sorts."
-	icon_state = "pink_cutlet"
+	icon_state = "pink"
 	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish/pink
+	average_size = 58
+	average_weight = 1800
+	fish_ai_type = FISH_AI_SLOW
+	fishing_difficulty_modifier = 5
 
-/obj/item/food/meat/slab/ms13/fish/chum
-	fish_type = "chum"
+/obj/item/fish/ms13/sockeye
+	name = "sockeye salmon"
+	desc = "A sockeye salmon, delicious! And not a bad catch."
+	icon_state = "sockeye"
+	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish/sockeye
+	average_size = 65
+	average_weight = 4500
+	fish_ai_type = FISH_AI_SLOW
+	fishing_difficulty_modifier = 15
+
+/obj/item/fish/ms13/chum
 	name = "chum salmon"
 	desc = "Generally considered cheap and low-quality, the chum salmon is an unlucky catch."
-	icon_state = "chum_cutlet"
+	icon_state = "chum"
 	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish/chum
+	average_size = 55
+	average_weight = 8000
+	fish_ai_type = FISH_AI_SLOW
+	fishing_difficulty_modifier = 15
 
-/obj/item/food/meat/slab/ms13/fish/sturgeon
-	fish_type = "sturgeon"
+/obj/item/fish/ms13/sturgeon // big ass fish on average. let's GOOO...
 	name = "white sturgeon"
 	desc = "Sturgeon can grow to pretty mind-boggling size. They used to be poached for their caviar."
-	icon_state = "sturgeon_cutlet"
+	icon_state = "sturgeon"
 	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish/sturgeon
+	average_size = 180
+	average_weight = 54400 //fuwuh.h.h. gjhglg.f.
+	fish_ai_type = FISH_AI_ZIPPY
+	fishing_difficulty_modifier = 35
 
-/obj/item/food/meat/slab/ms13/fish/asian
-	fish_type = "asian"
+/obj/item/fish/ms13/sturgeon/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
+
+/obj/item/fish/ms13/asian
 	name = "asian carp"
 	desc = "An invasive species, the Asian carp has endured even nuclear holocaust."
-	icon_state = "asian_cutlet"
+	icon_state = "asian"
 	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish/asian
+	average_size = 64
+	average_weight = 5440
+	fish_ai_type = FISH_AI_DUMB
+	fishing_difficulty_modifier = 10
 
-/obj/item/food/meat/slab/ms13/fish/blinky
-	fish_type = "blinky"
+/obj/item/fish/ms13/blinky
 	name = "blinky"
 	desc = "A very strange looking fish, likely a product of lots and lots of radiation."
-	icon_state = "blinky_cutlet"
+	icon_state = "blinky"
 	fillet_type = /obj/item/food/meat/rawcutlet/ms13/fish/blinky
+	average_size = 35
+	average_weight = 1200
+	fish_ai_type = FISH_AI_ZIPPY
+	fishing_difficulty_modifier = 5
 
 // Raw fish fillets
 
@@ -101,13 +126,12 @@
 	grid_width = 64
 	var/fish_cooked_type = /obj/item/food/meat/cutlet/ms13/fish
 	bite_consumption = 3
-	food_reagents = list(/datum/reagent/consumable/nutriment/protein = 3)
+	food_reagents = list(/datum/reagent/consumable/nutriment/protein = 4)
 	tastes = list("fish" = 8)
 	foodtypes = MEAT | RAW
 
 /obj/item/food/meat/rawcutlet/ms13/fish/MakeGrillable()
 	AddComponent(/datum/component/grillable, fish_cooked_type, rand(30 SECONDS, 60 SECONDS), TRUE, TRUE)
-
 
 /obj/item/food/meat/rawcutlet/ms13/fish/Initialize()
 	AddElement(/datum/element/world_icon, null, icon, 'mojave/icons/objects/food/fish/fish_inventory.dmi')
@@ -186,7 +210,6 @@
 /obj/item/food/meat/cutlet/ms13/fish/Initialize()
 	AddElement(/datum/element/world_icon, null, icon, 'mojave/icons/objects/food/fish/fish_inventory.dmi')
 	return ..()
-
 
 /obj/item/food/meat/cutlet/ms13/fish/sockeye
 	name = "cooked sockeye fillet"
