@@ -116,12 +116,16 @@
 	///RPG job names, for the memes
 	var/rpg_title
 
-	// MS13 EDIT BEGIN //
+	// MOJAVE SUN EDIT BEGIN //
 	var/forbid = ""
 
 	var/enforce = ""
 
-	// MS13 EDIT END //
+	///name of the UI that will try to open, right now using a generic ui
+	var/ui_name = "RoleInfoGeneric"
+
+	// MOJAVE SUN EDIT END
+
 /datum/job/New()
 	. = ..()
 	var/list/jobs_changes = get_map_changes()

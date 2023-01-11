@@ -10,6 +10,7 @@
 	outfit = /datum/outfit/job/ms13/wasteland/wastelander
 
 	display_order = JOB_DISPLAY_ORDER_MS13_WASTELANDER
+	ui_name = "JobInfoWastelander"
 
 /datum/outfit/job/ms13/wasteland/wastelander
 	name = "_Wastelander"

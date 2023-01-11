@@ -62,6 +62,11 @@ SUBSYSTEM_DEF(job)
 	/// Dictionary that maps job priorities to low/medium/high. Keys have to be number-strings as assoc lists cannot be indexed by integers. Set in setup_job_lists.
 	var/list/job_priorities_to_strings
 
+	//MOJAVE SUN EDIT BEGIN
+	///weakref to button to access job info interface
+	var/datum/weakref/info_button_ref
+	// MOJAVE SUN EDIT END
+
 /datum/controller/subsystem/job/Initialize(timeofday)
 	setup_job_lists()
 	if(!length(all_occupations))
@@ -523,12 +528,17 @@ SUBSYSTEM_DEF(job)
 			handle_auto_deadmin_roles(player_client, job.title)
 
 	if(player_client)
+		// MOJAVE SUN EDIT BEGIN
+		var/datum/action/role_info/info_button
+		info_button = new(src)
+		info_button.Grant(equipping)
+		info_button_ref = WEAKREF(info_button)
+		info_button.Trigger()
 		to_chat(player_client, "<span class='infoplain'><b>As the [job.title] you answer directly to [job.supervisors]. Special circumstances may change this.</b></span>")
-		// MS13 EDIT BEGIN //
 		to_chat(player_client, "<FONT color='blue'><B>[job.description]</b>")
 		to_chat(player_client, "<FONT color='red'><b>[job.forbid]</b>")
 		to_chat(player_client, "<FONT color='green'><b>[job.enforce]</b>")
-		// MS13 EDIT END //
+		// MOJAVE SUN EDIT END
 	job.radio_help_message(equipping)
 
 	if(player_client)
